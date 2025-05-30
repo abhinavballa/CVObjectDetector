@@ -45,7 +45,18 @@ def detect_real_time():
     video_capture.release()
     cv2.destroyAllWindows()
 
+# def detect_same_face(ref_image): 
+#     #Looks at live camera for face contained in ref_image and returns success message when match is found.
+#     image = cv2.imread(ref_image)
+#     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+#     face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+#     face = face_classifier.detectMultiScale(gray_image, scaleFactor= 1.1, minNeighbors=5, minSize=(40, 40)) #find face
+#     if len(face) == 0:
+#         print("Error: No faces detected")
+#         return
+
     
 
 #detect_image_static('head.jpeg')
 detect_real_time()
+#detect_same_face('head.jpeg')
