@@ -110,5 +110,42 @@ def delete_reference():
     except Exception as e:
         return jsonify({'success': False, 'message': str(e)})
 
+@app.route('/setup', methods=['POST'])
+def setup_reference():
+    try:
+        data = request.json
+        image_data = data['image']
+        filename = data.get('filename', 'reference_face.jpg')
+        # Convert base64 image to OpenCV format
+        image_data = image_data.split(',')[1]
+        image_bytes = base64.b64decode(image_data)
+        nparr = np.frombuffer(image_bytes, np.uint8)
+        image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        # Save the image
+        cv2.imwrite(filename, image)
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/reference', methods=['GET'])
+def list_references():
+    try:
+        files = [f for f in os.listdir('.') if f.startswith('reference_') and f.endswith('.jpg')]
+        references = [{'filename': f} for f in files]
+        return jsonify({'references': references})
+    except Exception as e:
+        return jsonify({'references': []})
+
+@app.route('/reference/<filename>', methods=['GET', 'DELETE'])
+def handle_reference(filename):
+    if request.method == 'GET':
+        return send_file(filename, mimetype='image/jpeg')
+    elif request.method == 'DELETE':
+        try:
+            os.remove(filename)
+            return jsonify({'success': True})
+        except Exception as e:
+            return jsonify({'success': False, 'error': str(e)})
+
 if __name__ == '__main__':
     app.run(port=5000) 

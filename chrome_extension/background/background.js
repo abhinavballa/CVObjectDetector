@@ -61,12 +61,9 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
             
             if (!verifiedSites.includes(hostname)) {
                 currentUrl = details.url;
-                // Open verification popup
-                chrome.windows.create({
-                    url: chrome.runtime.getURL('verification/verification.html'),
-                    type: 'popup',
-                    width: 450,
-                    height: 600
+                // Open verification page in a new tab (not popup window)
+                chrome.tabs.create({
+                    url: chrome.runtime.getURL('verification/verification.html')
                 });
             }
         }

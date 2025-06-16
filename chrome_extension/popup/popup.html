@@ -3,183 +3,31 @@
 <head>
     <title>Face ID Website Locker</title>
     <style>
-        body {
-            width: 400px;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 {
-            font-size: 20px;
-            color: #333;
-            margin: 0 0 20px 0;
-            text-align: center;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section h2 {
-            font-size: 16px;
-            color: #666;
-            margin: 0 0 10px 0;
-        }
-        #camera-container {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        #camera-feed {
-            width: 100%;
-            height: 300px;
-            background: #000;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-        #capture-btn {
-            width: 100%;
-            padding: 10px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        #capture-btn:hover {
-            background: #45a049;
-        }
-        #capture-btn:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-        }
-        #status {
-            text-align: center;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 4px;
-        }
-        .success {
-            background: #dff0d8;
-            color: #3c763d;
-        }
-        .error {
-            background: #f2dede;
-            color: #a94442;
-        }
-        .hidden {
-            display: none;
-        }
-        #reference-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .reference-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        .reference-item:last-child {
-            border-bottom: none;
-        }
-        .reference-name {
-            color: #333;
-            text-decoration: none;
-        }
-        .reference-name:hover {
-            text-decoration: underline;
-        }
-        .delete-btn {
-            color: #dc3545;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px 10px;
-        }
-        .delete-btn:hover {
-            color: #c82333;
-        }
-        #add-site {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        #site-input {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        #add-btn {
-            padding: 8px 15px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        #add-btn:hover {
-            background: #0056b3;
-        }
-        #locked-sites {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .site-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        .site-item:last-child {
-            border-bottom: none;
-        }
-        .remove-btn {
-            color: #dc3545;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px 10px;
-        }
-        .remove-btn:hover {
-            color: #c82333;
-        }
+        body { font-family: Arial, sans-serif; width: 350px; margin: 0; padding: 20px; background: #f5f5f5; }
+        h1 { font-size: 20px; text-align: center; margin-bottom: 20px; }
+        .section { margin-bottom: 20px; }
+        #add-site { display: flex; gap: 10px; margin-bottom: 10px; }
+        #site-input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        #add-btn, #reference-btn { padding: 8px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        #add-btn:hover, #reference-btn:hover { background: #0056b3; }
+        #locked-sites { list-style: none; padding: 0; margin: 0; }
+        .site-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; background: white; border-radius: 4px; margin-bottom: 5px; }
+        .remove-btn { color: #dc3545; background: none; border: none; cursor: pointer; padding: 5px 10px; }
+        .remove-btn:hover { color: #c82333; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Face ID Website Locker</h1>
-        
-        <div class="section">
-            <h2>Setup Face ID</h2>
-            <div id="camera-container">
-                <video id="camera-feed" autoplay></video>
-            </div>
-            <button id="capture-btn">Capture Reference Image</button>
-            <div id="status"></div>
+    <h1>Face ID Website Locker</h1>
+    <div class="section">
+        <h2 style="font-size:16px;">Blocked Websites</h2>
+        <div id="add-site">
+            <input type="text" id="site-input" placeholder="Enter website (e.g., facebook.com)">
+            <button id="add-btn">Add</button>
         </div>
-
-        <div class="section">
-            <h2>Reference Images</h2>
-            <ul id="reference-list"></ul>
-        </div>
-
-        <div class="section">
-            <h2>Locked Websites</h2>
-            <div id="add-site">
-                <input type="text" id="site-input" placeholder="Enter website (e.g., facebook.com)">
-                <button id="add-btn">Add</button>
-            </div>
-            <ul id="locked-sites"></ul>
-        </div>
+        <ul id="locked-sites"></ul>
+    </div>
+    <div class="section">
+        <button id="reference-btn">Add/Update Reference Image</button>
     </div>
     <script src="popup.js"></script>
 </body>

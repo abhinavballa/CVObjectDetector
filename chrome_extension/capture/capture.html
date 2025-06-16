@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Capture Reference Image</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        h2 { text-align: center; }
+        #camera-feed { display: block; margin: 0 auto 20px auto; width: 100%; max-width: 400px; background: #000; border-radius: 8px; }
+        #capture-btn { display: block; margin: 0 auto; padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+        #status { text-align: center; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Capture Reference Image</h2>
+    <video id="camera-feed" autoplay></video>
+    <button id="capture-btn">Capture</button>
+    <div id="status"></div>
+    <script src="capture.js"></script>
+</body>
+</html> 
